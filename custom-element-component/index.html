@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Custom Element</title>
+  </head>
+  <body>
+
+    <my-custom-element></my-custom-element>
+    <script type="text/javascript">
+      class MyCustomElement extends HTMLElement {
+        constructor() {
+          super();
+          this.addEventListener("click", () => alert("Clicked Custom"));
+        }
+
+        connectedCallback() {
+          this.innerHTML = '<h1>Hello Custom Element</h1>';
+        }
+      }
+
+      window.customElements.define('my-custom-element', MyCustomElement);
+    </script>
+  </body>
+</html>
