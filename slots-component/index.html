@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Slots</title>
+  </head>
+  <body>
+    <template id="template">
+
+    </template>
+    <script>
+        //Flexible HTML with HTMLTemplates using Slots and Web Components
+        const templateString = `
+        <div>
+            <slot name="slot1"></slot>
+        </div>
+        <form>
+            <input/>
+        </form>
+        <slot name="slot2"></slot>
+        `;
+        const template = document.createElement('template');
+        template.innerHTML = templateString;
+        class CustomElement extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({mode: "open"});
+                this.shadowRoot
+                    .appendChild(template.content.cloneNode(true));
+            }
+
+        }
+        customElements.define('custom-element', CustomElement);
+    </script>
+    <custom-element>
+        <p slot="slot1">Slot 1 text</p>
+        <p slot="slot2">Slot 2 text</p>
+    </custom-element>
+    <custom-element>
+        <iframe slot="slot1" width="560" height="315" src="https://www.youtube.com/embed/Bv_5Zv5c-Ts" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div slot="slot2">Slot 2 text inside a div</div>
+    </custom-element>
+  </body>
+</html>
